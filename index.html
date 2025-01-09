@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Website</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        #entry-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+        }
+
+        #entry-image {
+            width: 1920px;
+            height: 1080px;
+            cursor: pointer;
+        }
+
+        #main-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: black;
+        }
+
+        #background-image {
+            position: absolute;
+            width: 1920px;
+            height: 1080px;
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        #text-image {
+            position: absolute;
+            width: 1920px;
+            height: 1080px;
+            pointer-events: none;
+        }
+
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 10px #c4d9ff); }
+            50% { filter: drop-shadow(0 0 20px #c4d9ff); }
+            100% { filter: drop-shadow(0 0 10px #c4d9ff); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Entry Image -->
+    <div id="entry-container">
+        <img id="entry-image" src="https://files.catbox.moe/zczu0m.png" alt="Enter Site">
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-container">
+        <img id="background-image" src="https://files.catbox.moe/urrtr3.png" alt="Background">
+        <img id="text-image" src="https://files.catbox.moe/fa4r89.png" alt="Text Overlay">
+    </div>
+
+    <!-- Audio -->
+    <audio id="entry-audio" src="https://files.catbox.moe/1c9o3u.mp3"></audio>
+
+    <script>
+        const entryContainer = document.getElementById('entry-container');
+        const mainContainer = document.getElementById('main-container');
+        const entryImage = document.getElementById('entry-image');
+        const entryAudio = document.getElementById('entry-audio');
+
+        // Play audio and transition to main content
+        function enterSite() {
+            entryAudio.play();
+            entryContainer.style.animation = 'fadeOut 1s forwards';
+            setTimeout(() => {
+                entryContainer.style.display = 'none';
+                mainContainer.style.display = 'flex';
+                mainContainer.style.animation = 'fadeIn 2s forwards';
+            }, 1000);
+        }
+
+        entryImage.addEventListener('click', enterSite);
+        entryContainer.addEventListener('click', enterSite);
+    </script>
+
+</body>
+</html>
